@@ -91,10 +91,8 @@ export const Contact = () => {
     setErrorMessage('');
 
     try {
-      // Try local or deployed backend API endpoint (strip any trailing slashes to prevent //api/contact)
-      const rawApiUrl = import.meta.env.VITE_API_URL || '';
-      const apiUrl = rawApiUrl.replace(/\/+$/, '');
-      const response = await fetch(`${apiUrl}/api/contact`, {
+      // Send directly to /api/contact (handled seamlessly by Vercel Serverless Function)
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
