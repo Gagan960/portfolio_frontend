@@ -91,8 +91,9 @@ export const Contact = () => {
     setErrorMessage('');
 
     try {
-      // Try local or deployed backend API endpoint
-      const apiUrl = import.meta.env.VITE_API_URL || '';
+      // Try local or deployed backend API endpoint (strip any trailing slashes to prevent //api/contact)
+      const rawApiUrl = import.meta.env.VITE_API_URL || '';
+      const apiUrl = rawApiUrl.replace(/\/+$/, '');
       const response = await fetch(`${apiUrl}/api/contact`, {
         method: 'POST',
         headers: {
